@@ -1,0 +1,33 @@
+BetaMon
+-------
+ 1. Refactor to introduce MoveStrategy
+ 2. Refactor to introduce Board -> chicken and hen -> set method - game or strategy?
+
+
+Introduce BetaMonMoveStrategy:
+ 1. Move from empty location not possible (R2 to R3)
+ 2. Can move from R1 to R2
+ 3. Black cannot move from R6 to R7 (Red checker on R6)
+ 4. Black cannot move R12 to R11 (moving away from Black's inner table)
+ 5. Red cannot move R6 to R7 (moving away from Red's inner table)
+ 6. Not possible to move checker before next game (player in turn = NONE)
+ 7. Check not possible for Black to move 5 in first turn -> add parameter to isMoveValid (dice)
+ 8. Check not possible for Red to move 5 in first turn -> add parameter to isMoveValid (dice)
+ 9. Red can move from R8 to R5
+10. Black cannot move a checkers 1 location twice in a row (dice 1-2)
+11. Red can move to loction with 1 Black checker -> opponent moved to Black bar
+12. Black cannot move from R12 to B12 (5 opponent checkers)
+13. Black can move to loction with 1 Red checker -> opponent moved to Red bar
+14. Red not able to move another checker when checker in bar
+15. Black not able to move another checker when checker in bar
+16. Red is able to move the checker placed at the bar
+17. Black is able to move the checker placed at the bar
+
+GammaMon
+1. Winner is none after 6 turns
+
+GammaMon - unittests
+1. Winner is BLACK if all black checkers are placed at the black bear off.
+2. Winner is NONE if not all black checkers are placed at the black bear off.
+3. Winner is RED if all red checkers are placed at the red bear off.
+
