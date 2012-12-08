@@ -1,4 +1,5 @@
 package hotgammon.log.entity;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,11 +13,14 @@ import hotgammon.Location;
 @Table(name="MOVE_LOG")
 public class MoveLog extends HotgammonLog {	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable=false)
 	private Location fromLocation;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable=false)
 	private Location toLocation;
 	
+	@Column(nullable=false)
 	private boolean resultOfAction;
 
 	public Location getFromLocation() {

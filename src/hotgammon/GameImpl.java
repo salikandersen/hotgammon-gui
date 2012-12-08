@@ -1,5 +1,7 @@
 package hotgammon;
 
+import hotgammon.variants.dice.DiceStrategyStub;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +22,14 @@ public class GameImpl implements Game {
 	private WinningStrategy winningStrategy;
 	private DiceStrategy diceStrategy;
 
-	private List<Integer> dieValues = new ArrayList<Integer>();
+	private List<Integer> dieValues;
 	private Board board;
 	private final TurnManager turnManager = new TurnManager();
 	private StartingPositionStrategy startingPostionStrategy;
 	private int movesLeft;
 
 	private final List<GameObserver> observers = new ArrayList<GameObserver>();
+	private int[] diceThrown;
 
 	public GameImpl(HotgammonFactory factory) {
 		this.moveValidateStrategy = factory.createValidateMoveStrategy();
@@ -38,6 +41,9 @@ public class GameImpl implements Game {
 	}
 
 	public void newGame() {
+		diceThrown = new int[] { 0, 0 };
+		movesLeft = 0;
+		dieValues = new ArrayList<Integer>();
 		board = new Board(startingPostionStrategy);
 		turnManager.reset();
 	}
@@ -57,7 +63,17 @@ public class GameImpl implements Game {
 		}
 
 		turnManager.changeTurn();
-		diceThrown();
+		
+		diceThrown = diceStrategy.throwDice(this);
+		
+		dieValues = new ArrayList<Integer>();
+
+		for (Integer dieValue : diceThrown) {
+			dieValues.add(dieValue);
+		}
+		
+		update(diceThrown);
+		
 		movesLeft = 2;
 	}
 
@@ -116,20 +132,6 @@ public class GameImpl implements Game {
 	}
 
 	public int[] diceThrown() {
-		int[] diceThrown;
-		if (!isGameStartet()) {
-			diceThrown = new int[] { 0, 0 };
-		} else {
-			diceThrown = diceStrategy.throwDice(this);
-		}
-		
-		dieValues = new ArrayList<Integer>();
-
-		for (Integer dieValue : diceThrown) {
-			dieValues.add(dieValue);
-		}
-		
-		update(diceThrown);
 		return diceThrown;
 	}
 
@@ -176,6 +178,16 @@ public class GameImpl implements Game {
 	@Override
 	public void addObserver(GameObserver gameObserver) {
 		observers.add(gameObserver);
+	}
+
+	@Override
+	public DiceStrategy getDiceStrategy() {
+		return diceStrategy;
+	}
+
+	@Override
+	public void setDiceStrategy(DiceStrategy diceStrategy) {
+		this.diceStrategy = diceStrategy; 
 	}
 
 }

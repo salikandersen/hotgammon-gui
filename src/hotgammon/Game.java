@@ -1,5 +1,6 @@
 package hotgammon;
 
+
 /**
  * This interface encapsulate all responsibilites of a Backgammon game. Please
  * consult the book's project part for further descriptions.
@@ -133,5 +134,9 @@ public interface Game {
 	public TurnManager getTurnManager();
 
 	public void addObserver(GameObserver gameObserver);
+
+	public DiceStrategy getDiceStrategy();
+
+	public void setDiceStrategy(DiceStrategy diceStrategy);
 
 }

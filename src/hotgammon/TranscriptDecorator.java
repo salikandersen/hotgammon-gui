@@ -1,5 +1,7 @@
 package hotgammon;
 
+import hotgammon.variants.dice.DiceStrategyStub;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -117,6 +119,16 @@ public class TranscriptDecorator implements Game {
 	public void addObserver(GameObserver gameObserver) {
 		game.addObserver(gameObserver);
 
+	}
+
+	@Override
+	public DiceStrategy getDiceStrategy() {
+		return game.getDiceStrategy();
+	}
+
+	@Override
+	public void setDiceStrategy(DiceStrategy diceStrategy) {
+		game.setDiceStrategy(diceStrategy);
 	}
 
 }

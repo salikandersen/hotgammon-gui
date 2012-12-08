@@ -17,8 +17,7 @@ private GameImpl game;
 	}
 	
 	@Test
-	public void mustGive12AsFirstRoll() {
-		
+	public void mustGive12AsFirstRoll() {		
 		game.nextTurn();
 		int[] diceValues = game.diceThrown(); // Dice show 1-2
 		assertEquals(1, diceValues[0]);

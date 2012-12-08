@@ -2,14 +2,16 @@ package hotgammon.log;
 
 import hotgammon.Board;
 import hotgammon.Color;
+import hotgammon.DiceStrategy;
 import hotgammon.Game;
 import hotgammon.GameObserver;
 import hotgammon.Location;
 import hotgammon.TurnManager;
+import hotgammon.log.entity.DiceThrownLog;
 import hotgammon.log.entity.MoveLog;
 
 public class HotgammonLogDecorator implements Game  {
-	
+
 	private Game game;
 	private LogStrategy logStrategy;
 
@@ -17,7 +19,12 @@ public class HotgammonLogDecorator implements Game  {
 		this.game = game;
 		this.logStrategy = logStrategy;
 	}
-	
+
+
+	public LogStrategy getLogStrategy() {
+		return logStrategy;
+	}
+
 	@Override
 	public void newGame() {
 		game.newGame();
@@ -26,18 +33,26 @@ public class HotgammonLogDecorator implements Game  {
 	@Override
 	public void nextTurn() {
 		game.nextTurn();
+
+		int[] diceThrown = diceThrown();
+
+		DiceThrownLog diceThrownLog = new DiceThrownLog();
+		diceThrownLog.setPlayer(game.getPlayerInTurn());
+		diceThrownLog.setDiceOne(diceThrown[0]);
+		diceThrownLog.setDiceTwo(diceThrown[1]);
+		logStrategy.log(diceThrownLog);
 	}
 
 	@Override
 	public boolean move(Location from, Location to) {
 		boolean result = game.move(from, to);
-		
+
 		MoveLog moveLog = new MoveLog();
 		moveLog.setFromLocation(from);
 		moveLog.setToLocation(to);
 		moveLog.setPlayer(game.getPlayerInTurn());
 		moveLog.setResultOfAction(result);
-		
+
 		logStrategy.log(moveLog);
 		return result;
 	}
@@ -95,5 +110,15 @@ public class HotgammonLogDecorator implements Game  {
 	@Override
 	public void addObserver(GameObserver gameObserver) {
 		game.addObserver(gameObserver);
+	}
+
+	@Override
+	public DiceStrategy getDiceStrategy() {
+		return game.getDiceStrategy();
+	}
+
+	@Override
+	public void setDiceStrategy(DiceStrategy diceStrategy) {
+		game.setDiceStrategy(diceStrategy);
 	}
 }
