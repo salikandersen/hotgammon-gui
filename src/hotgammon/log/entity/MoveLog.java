@@ -46,4 +46,5 @@ public class MoveLog extends HotgammonLog {
 	public void setResultOfAction(boolean resultOfAction) {
 		this.resultOfAction = resultOfAction;
 	}
+
 }

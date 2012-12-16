@@ -32,4 +32,6 @@ public class DiceThrownLog extends HotgammonLog {
 	public void setDiceTwo(int diceTwo) {
 		this.diceTwo = diceTwo;
 	}
+	
+	
 }

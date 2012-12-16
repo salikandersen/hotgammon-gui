@@ -21,7 +21,7 @@ public class HotgammonPropApperanceStrategy implements PropAppearanceStrategy{
 		default:
 			return null;
 		}
-	    
-	  }
+		
+	}
 
 }

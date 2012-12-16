@@ -3,6 +3,7 @@ import hotgammon.Color;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -15,19 +16,21 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @DiscriminatorColumn(name="TYPE", discriminatorType=DiscriminatorType.STRING)
 @Inheritance(strategy=InheritanceType.JOINED)
 @NamedQueries ( {
 	@NamedQuery(name="find.all.hotgammonlogs", query="select log from HotgammonLog log"),
-	@NamedQuery(name="delete.all.hotgammonlogs", query="delete  from HotgammonLog log")
+	@NamedQuery(name="delete.all.hotgammonlogs", query="delete from HotgammonLog log")
 }
 )
-public abstract class HotgammonLog {
-	@Id
+public abstract class HotgammonLog implements Comparable<HotgammonLog> {
+	@Id 
 	@GeneratedValue
 	private int id;
 
@@ -43,9 +46,18 @@ public abstract class HotgammonLog {
 	public int getId() {
 		return id;
 	}
+	
+	//dette er kun nødvendigt, da vi genbruger de samme klasser til DirectSql og JPA
+	public void setId(Integer id){
+		this.id = id;
+	}
 
 	public Date getCreated() {
 		return created;
+	}
+	//dette er kun nødvendigt, da vi genbruger de samme klasser til DirectSql og JPA
+	public void setCreated(Date created){
+		this.created = created;
 	}
 
 	public Color getPlayer() {
@@ -55,4 +67,11 @@ public abstract class HotgammonLog {
 	public void setPlayer(Color player) {
 		this.player = player;
 	}
+
+	@Override
+	@Transient
+	public int compareTo(HotgammonLog o) {
+		return this.getCreated().compareTo(o.getCreated());
+	}
+	
 }
