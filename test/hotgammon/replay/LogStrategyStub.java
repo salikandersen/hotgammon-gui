@@ -29,4 +29,9 @@ public class LogStrategyStub implements LogStrategy {
 		
 	}
 
+	@Override
+	public void resetLogs() {
+		hotgammonLogs = new ArrayList<HotgammonLog>();
+	}
+
 }

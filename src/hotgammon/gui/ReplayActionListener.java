@@ -26,7 +26,6 @@ public class ReplayActionListener implements ActionListener {
 		Replayer replayer = new Replayer(game, logStrategy);
 		replayer.replay();
 		logStrategy.logging(true);
-		
 	}
 
 }

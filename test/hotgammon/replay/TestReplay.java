@@ -1,11 +1,14 @@
 package hotgammon.replay;
 
+import java.util.List;
+
 import hotgammon.Color;
 import hotgammon.Game;
 import hotgammon.GameImpl;
 import hotgammon.Location;
 import hotgammon.log.HotgammonLogDecorator;
 import hotgammon.log.LogStrategy;
+import hotgammon.log.entity.HotgammonLog;
 import hotgammon.variants.factory.AlphaMonFactory;
 import hotgammon.variants.factory.BetaMonFactory;
 import hotgammon.variants.factory.SemiMonFactory;
@@ -45,6 +48,36 @@ public class TestReplay {
 		
 		Assert.assertEquals(diceThrown[0], replayDiceThrown[0]);
 		Assert.assertEquals(diceThrown[1], replayDiceThrown[1]);
+	}
+	
+	@Test
+	public void ShouldNotWriteMoveFromR2toR1IntoLog() {
+		game.nextTurn();
+		game.move(Location.R1, Location.R3);
+		
+		logStrategy.logging(false);
+		game.move(Location.R1, Location.R2);
+		
+		game.newGame();
+		
+		Replayer replayer = new Replayer(game, logStrategy);
+		replayer.replay();
+		
+		Assert.assertEquals(1, game.getCount(Location.R3));
+		Assert.assertEquals(1, game.getCount(Location.R1));
+		Assert.assertEquals(0, game.getCount(Location.R2));
+	}
+	
+	@Test
+	public void LogShouldBeEmptyAfterReset() {
+		game.nextTurn();
+		game.move(Location.R1, Location.R3);
+
+		logStrategy.resetLogs();
+		
+		List<HotgammonLog> allHotgammonLogs = logStrategy.getAllHotgammonLogs();
+		
+		Assert.assertEquals(0, allHotgammonLogs.size());
 	}
 	
 	@Test
@@ -114,6 +147,5 @@ public class TestReplay {
 		Assert.assertEquals(1, game.getCount(Location.B_BAR));
 		Assert.assertEquals(Color.BLACK, game.getColor(Location.B_BAR));
 	}
-	
-	
+
 }
