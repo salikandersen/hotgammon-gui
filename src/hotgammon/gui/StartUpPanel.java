@@ -23,17 +23,20 @@ public class StartUpPanel extends JFrame {
 		StartUpPanel startUpPanel = new StartUpPanel();
 		startUpPanel.setVisible(true);
 		HotgammonGui.setStartUpPanel(startUpPanel);
+
 	}
 	
 	public StartUpPanel() {
+		// Choose between logstrategies, N.B: only HibernateJPALogStrategy generates database tables
+//		logStrategy = new DirectSqlLogStrategy();
+		logStrategy = new HibernateJPALogStrategy();
+
 		JPanel panel = new JPanel();
 		setTitle("Replay Panel");
 		setSize(300, 200);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-//		logStrategy = new DirectSqlLogStrategy();
-		logStrategy = new HibernateJPALogStrategy();
 		game = new HotgammonLogDecorator(new GameImpl(new SemiMonFactory()), logStrategy);
 		
 		JButton newGamButton = new JButton("New Game");
