@@ -16,7 +16,9 @@
 
   <target name="help">
     <echo>
-		Build target 'build-all' builds and tests everything.
+target build-all bygger og klargoerer applikationen og testene
+target test eksekverer alle tests
+target gui starter den tilhoerende brugergraenseflade
     </echo>
   </target>
 
@@ -30,11 +32,19 @@
     <mkdir dir="${javadoc-directory}"/>
   </target>
 
-  <target name="build-src" depends="prepare">
+  <target name="build-src" depends="prepare, copy-resource">
     <javac srcdir="${source-directory}"
       destdir="${build-directory}" includeantruntime="false">
       <classpath refid="classpath"/>
     </javac>
+  </target>
+	
+	<target name="copy-resource" depends="prepare">
+    <copy todir="${build-directory}/resource">
+			<fileset dir="${source-directory}/resource">
+			<include name="*.gif"></include>
+			</fileset>
+		</copy>
   </target>
 
   <target name="build-test" depends="build-src">
@@ -64,4 +74,11 @@
     </javadoc>
   </target>
   
+  <target name="gui"  depends="build-all">
+    <java fork="yes" classname="hotgammon.gui.Hotgammon">
+      <classpath refid="classpath"/>
+    </java>
+  </target>
+
+	
 </project>
