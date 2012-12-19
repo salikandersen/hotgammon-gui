@@ -18,14 +18,12 @@ public class DieRollCommand implements Command {
 
 	@Override
 	public void setFromCoordinates(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
+		//not implemented because it should not be moved
 	}
 
 	@Override
 	public void setToCoordinates(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
+		//not implemented because it should not be moved		
 	}
 
 }

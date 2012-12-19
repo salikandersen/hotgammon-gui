@@ -15,13 +15,14 @@ import minidraw.boardgame.FigureFactory;
 public class HotgammonPieceFactory  implements FigureFactory<Location>{
 
 	private Game game;
+	
 	public HotgammonPieceFactory(Game game){
 		this.game = game;
 	}
 	
 	@Override
 	public Map<Location, List<BoardFigure>> generatePieceMultiMap() {
-		Map<Location, List<BoardFigure>> m = 
+		Map<Location, List<BoardFigure>> pieceMultiMap = 
 			      new HashMap<Location, List<BoardFigure>>();
 		
 		for (Location location : Location.values()) {
@@ -33,30 +34,30 @@ public class HotgammonPieceFactory  implements FigureFactory<Location>{
 			for (int i = 0; i < count; i++) {
 				switch (color) {
 				case BLACK:
-					locationList.add(new BoardFigure("blackchecker", true, new MoveCommand(game)));
+					locationList.add(new BoardFigure(HotgammonGuiConstants.BLACKCHECKER, true, new MoveCommand(game)));
 					break;
 				case RED:
-					locationList.add(new BoardFigure("redchecker", true, new MoveCommand(game)));
+					locationList.add(new BoardFigure(HotgammonGuiConstants.REDCHECKER, true, new MoveCommand(game)));
 					break;
 				default:
 					break;
 				}
 			}
 			
-			m.put(location, locationList);
+			pieceMultiMap.put(location, locationList);
 		}
 		
-		return m;
+		return pieceMultiMap;
 	}
 
 	@Override
 	public Map<String, BoardFigure> generatePropMap() {
-		BoardFigure die0 = new BoardFigure("die0", false, new DieRollCommand(game));
-		BoardFigure die1 = new BoardFigure("die0", false, new DieRollCommand(game));
-		Map<String,BoardFigure> m = new HashMap<String,BoardFigure>();
-		m.put("die0", die0);
-		m.put("die1", die1);
-		return m;
+		BoardFigure die0 = new BoardFigure(HotgammonGuiConstants.DEFAULT_DIE_PICTURE, false, new DieRollCommand(game));
+		BoardFigure die1 = new BoardFigure(HotgammonGuiConstants.DEFAULT_DIE_PICTURE, false, new DieRollCommand(game));
+		Map<String,BoardFigure> propMap = new HashMap<String,BoardFigure>();
+		propMap.put(HotgammonGuiConstants.DIE0_NAME, die0);
+		propMap.put(HotgammonGuiConstants.DIE1_NAME, die1);
+		return propMap;
 	}
 
 

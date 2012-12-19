@@ -35,7 +35,7 @@ public class HotgammonFactory implements Factory{
 
 	@Override
 	public JTextField createStatusField(DrawingEditor arg0) {
-		// TODO Auto-generated method stub
+		//Not implemented
 		return null;
 	}
 
