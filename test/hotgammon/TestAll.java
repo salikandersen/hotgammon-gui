@@ -16,12 +16,20 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ TestBackGammonWinningStrategy.class,
-		TestDiceStrategy.class, TestHypergammonStartingPositionStrategy.class,
-		TestLocation.class, TestAlphaMon.class, TestBetaMon.class,
-		TestEpsilonMon.class, TestGammaMon.class, TestHandicap.class,
-		TestZetaMon.class, TestSemiMon.class, TestTranscriptDecorator.class,
-		TestGameObserver.class })
+@Suite.SuiteClasses({ 
+	TestBackGammonWinningStrategy.class,
+	TestDiceStrategy.class, 
+	TestHypergammonStartingPositionStrategy.class,
+	TestLocation.class, 
+	TestAlphaMon.class, 
+	TestBetaMon.class,
+	TestEpsilonMon.class, 
+	TestGammaMon.class, 
+	TestHandicap.class,
+	TestZetaMon.class, 
+	TestSemiMon.class, 
+	TestGameObserver.class 
+	})
 public class TestAll {
 	// Dummy - it is the annotations that tell JUnit what to do...
 }
