@@ -19,6 +19,5 @@ public class NewGameActionListener  implements ActionListener{
 		logStrategy.resetLogs();
 		HotgammonGui.setupHotgammonGui(game);
 		game.newGame();
-		game.nextTurn();
 	}
 }
