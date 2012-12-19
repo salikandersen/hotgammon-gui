@@ -32,6 +32,7 @@ public class TestLog {
 	@Before
 	public void setup() {
 		logStrategy = new HibernateJPALogStrategy();
+		logStrategy.resetLogs();
 		game = new HotgammonLogDecorator(new GameImpl(new AlphaMonFactory()), logStrategy);
 		game.newGame();
 		

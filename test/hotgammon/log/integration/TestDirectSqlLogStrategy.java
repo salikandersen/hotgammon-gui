@@ -26,9 +26,9 @@ public class TestDirectSqlLogStrategy {
 	@Before
 	public void setup() throws SQLException {
 		logStrategy = new DirectSqlLogStrategy();
+		logStrategy.resetLogs();
 		game = new HotgammonLogDecorator(new GameImpl(new AlphaMonFactory()), logStrategy);
 		game.newGame();
-		logStrategy.resetLogs();
 	}
 	
 	@Test

@@ -1,7 +1,6 @@
 package hotgammon.gui;
 
 import hotgammon.GameImpl;
-import hotgammon.log.DirectSqlLogStrategy;
 import hotgammon.log.HibernateJPALogStrategy;
 import hotgammon.log.HotgammonLogDecorator;
 import hotgammon.log.LogStrategy;
@@ -33,7 +32,8 @@ public class StartUpPanel extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		logStrategy = new DirectSqlLogStrategy();
+//		logStrategy = new DirectSqlLogStrategy();
+		logStrategy = new HibernateJPALogStrategy();
 		game = new HotgammonLogDecorator(new GameImpl(new SemiMonFactory()), logStrategy);
 		
 		JButton newGamButton = new JButton("New Game");

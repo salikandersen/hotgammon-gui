@@ -11,10 +11,10 @@ public class HotgammonPositionStrategy implements PositioningStrategy<Location> 
 
 	@Override
 	public Point calculateFigureCoordinatesForProps(String keyOfProp) {
-		if (keyOfProp.equals("die0")) {
+		if (keyOfProp.equals(HotgammonGuiConstants.DIE0_NAME)) {
 		      return new Point(220, 200);
 		    }
-		if (keyOfProp.equals("die1")) {
+		if (keyOfProp.equals(HotgammonGuiConstants.DIE1_NAME)) {
 		      return new Point(300, 200);
 		    }
 		return null;

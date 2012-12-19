@@ -14,9 +14,9 @@ public class HotgammonPropApperanceStrategy implements PropAppearanceStrategy{
 	@Override
 	public String calculateImageNameForPropWithKey(String key) {
 		switch (key) {
-		case "die0":
+		case HotgammonGuiConstants.DIE0_NAME:
 			return "die"+game.diceValuesLeft()[0];
-		case "die1":
+		case HotgammonGuiConstants.DIE1_NAME:
 			return "die"+game.diceValuesLeft()[1];
 		default:
 			return null;

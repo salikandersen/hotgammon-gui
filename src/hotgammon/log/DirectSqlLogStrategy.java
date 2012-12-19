@@ -22,7 +22,6 @@ public class DirectSqlLogStrategy implements LogStrategy {
 		} catch (SQLException e) {
 			throw new RuntimeException("Something went wrong", e);
 		}
-
 	}
 
 	@Override

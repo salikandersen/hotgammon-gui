@@ -23,21 +23,14 @@ public class Replayer {
 		for (HotgammonLog log : logStrategy.getAllHotgammonLogs()) {
 			if(log instanceof DiceThrownLog){
 				DiceThrownLog diceThrownLog = (DiceThrownLog) log;
-				
 				DiceStrategy diceStrategy = game.getDiceStrategy();
-				
 				game.setDiceStrategy(new DiceStrategyStub(new int[]{diceThrownLog.getDiceOne(), diceThrownLog.getDiceTwo() }));
-				
 				game.nextTurn();
-				
 				game.setDiceStrategy(diceStrategy);
-				
 				System.out.println("Dice rolled [" + game.diceThrown()[0] + "," + game.diceThrown()[1] + "], "+ game.getPlayerInTurn()+" is in turn");
 			} else{
 				MoveLog moveLog = (MoveLog)log;
-				
 				game.move(moveLog.getFromLocation(), moveLog.getToLocation());
-				
 				System.out.println(game.getPlayerInTurn() + " moved from " + moveLog.getFromLocation() + " to " + moveLog.getToLocation() + ". Numbers of moves left: " + game.getNumberOfMovesLeft());
 			}
 		}

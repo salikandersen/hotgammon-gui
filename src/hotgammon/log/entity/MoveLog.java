@@ -1,12 +1,12 @@
 package hotgammon.log.entity;
+import hotgammon.Location;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
-
-import hotgammon.Location;
 
 @Entity
 @DiscriminatorValue("Move")

@@ -19,19 +19,18 @@ import java.util.List;
 import com.mysql.jdbc.Connection;
 
 public class DirectSqlResources {
-	String dbUrl = "jdbc:mysql://localhost:3306/test";
-	String dbClass = "com.mysql.jdbc.Driver";
-	String user = "admin";
-	String password= "password";
-	Connection connection;
+	private final String dbUrl = "jdbc:mysql://localhost:3306/test";
+	private final String dbClass = "com.mysql.jdbc.Driver";
+	private final String user = "admin";
+	private final String password= "password";
+	private Connection connection;
 	
 	private void connect() throws SQLException {
 		try {
-			Class.forName( "com.mysql.jdbc.Driver" );
+			Class.forName(dbClass);
 			connection = (Connection) DriverManager.getConnection( dbUrl, user, password );
 			connection.setAutoCommit(false);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
