@@ -27,7 +27,7 @@ public class StartUpPanel extends JFrame {
 	}
 	
 	public StartUpPanel() {
-		// Choose between logstrategies, N.B: only HibernateJPALogStrategy generates database tables
+		// Choose between log strategies, N.B: only HibernateJPALogStrategy generates database tables
 //		logStrategy = new DirectSqlLogStrategy();
 		logStrategy = new HibernateJPALogStrategy();
 
