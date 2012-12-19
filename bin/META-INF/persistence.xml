@@ -12,7 +12,6 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>
             <property name="javax.persistence.jdbc.user" value="admin"/>
             <property name="javax.persistence.jdbc.password" value="password"/>
-            <property name="javax.persistence.jdbc." value="password"/>
             <property name="hibernate.show_sql" value="true" />
         </properties>
     </persistence-unit>

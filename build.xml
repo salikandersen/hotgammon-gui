@@ -1,55 +1,26 @@
-<!-- Build file for the Pay Station case study
-
-   This source code is from the book 
-     "Flexible, Reliable Software:
-       Using Patterns and Agile Development"
-     published 2010 by CRC Press.
-   Author: 
-     Henrik B Christensen 
-     Computer Science Department
-     Aarhus University
-   
-   This source code is provided WITHOUT ANY WARRANTY either 
-   expressed or implied. You may study, use, modify, and 
-   distribute it for non-commercial purposes. For any 
-   commercial use, see http://www.baerbak.com/
--->
 <project name="HotGammon" default="help" basedir=".">
     
   <property name="source-directory" value="src"/>
   <property name="test-source-directory" value="test"/>
   <property name="build-directory" value="build"/>
   <property name="javadoc-directory" value="javadoc"/>
+  <property name="lib-dir" value="lib"/>
 
-  <property name="junit-jar" value="lib/junit-4.10.jar"/>
+  <property name="junit-jar" value="${lib-dir}/junit-4.10.jar"/>
+  <property name="minidraw-jar" value="${lib-dir}/minidraw.jar"/>
 
-  <path id="class-path">
+  <path id="classpath">
     <pathelement location="${build-directory}"/>
-    <pathelement location="${junit-jar}"/>
+     <fileset dir="${lib-dir}">
+        <include name="**/*.jar"/>
+      </fileset>
   </path>
 
   <target name="help">
     <echo>
-Pay station build management.
-  Targets:
-    build-src: Builds production code.
-    test:      JUnit test production code.
-    clean:     Removes all bytecode.
-    javadoc:   Generate JavaDoc.
-
-   This source code is from the book 
-     "Flexible, Reliable Software:
-       Using Patterns and Agile Development"
-     published 2010 by CRC Press.
-   Author: 
-     Henrik B Christensen 
-     Computer Science Department
-     Aarhus University
-   
-   This source code is provided WITHOUT ANY WARRANTY either 
-   expressed or implied. You may study, use, modify, and 
-   distribute it for non-commercial purposes. For any 
-   commercial use, see http://www.baerbak.com/
+target build-all bygger og klargoerer applikationen og testene
+target test eksekverer alle tests
+target gui starter den tilhoerende brugergraenseflade
     </echo>
   </target>
 
@@ -63,17 +34,29 @@ Pay station build management.
     <mkdir dir="${javadoc-directory}"/>
   </target>
 
-  <target name="build-src" depends="prepare">
+  <target name="build-src" depends="prepare, copy-resource">
     <javac srcdir="${source-directory}"
-      destdir="${build-directory}">
-      <classpath refid="class-path"/>
+      destdir="${build-directory}" includeantruntime="false">
+      <classpath refid="classpath"/>
     </javac>
+		<copy todir="${build-directory}/META-INF">
+			<fileset dir="${source-directory}/META-INF">
+			</fileset>
+		</copy>
+  </target>
+	
+	<target name="copy-resource" depends="prepare">
+    <copy todir="${build-directory}/resource">
+			<fileset dir="${source-directory}/resource">
+			<include name="*.gif"></include>
+			</fileset>
+		</copy>
   </target>
 
   <target name="build-test" depends="build-src">
     <javac srcdir="${test-source-directory}"
-      destdir="${build-directory}">
-      <classpath refid="class-path"/>
+      destdir="${build-directory}" includeantruntime="false">
+      <classpath refid="classpath"/>
     </javac>
   </target>
 
@@ -82,7 +65,7 @@ Pay station build management.
   <target name="test"  depends="build-all">
     <java classname="org.junit.runner.JUnitCore">
       <arg value="hotgammon.TestAll"/>
-      <classpath refid="class-path"/>
+      <classpath refid="classpath"/>
     </java>
   </target>
 
@@ -91,10 +74,17 @@ Pay station build management.
       packagenames="hotgammon*"
       destdir="${javadoc-directory}"
       sourcepath="${source-directory}"
-      windowtitle="Pay station system">
+      windowtitle="Hotgammon opgave2">
       
-      <classpath refid="class-path"/>
+      <classpath refid="classpath"/>
     </javadoc>
   </target>
   
+  <target name="gui"  depends="build-all">
+    <java fork="yes" classname="hotgammon.gui.StartUpPanel">
+      <classpath refid="classpath"/>
+    </java>
+  </target>
+
+	
 </project>

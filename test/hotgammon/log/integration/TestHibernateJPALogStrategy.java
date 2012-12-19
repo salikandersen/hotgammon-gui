@@ -1,14 +1,5 @@
 package hotgammon.log.integration;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-
-import junit.framework.Assert;
-
 import hotgammon.Color;
 import hotgammon.Game;
 import hotgammon.GameImpl;
@@ -20,6 +11,12 @@ import hotgammon.log.entity.DiceThrownLog;
 import hotgammon.log.entity.HotgammonLog;
 import hotgammon.log.entity.MoveLog;
 import hotgammon.variants.factory.AlphaMonFactory;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;

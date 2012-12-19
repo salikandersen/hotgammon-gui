@@ -18,8 +18,6 @@ import org.hibernate.engine.transaction.spi.LocalStatus;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.xml.internal.ws.api.pipe.NextAction;
-
 public class TestReplay {
 	private Game game;
 	private LogStrategy logStrategy;
